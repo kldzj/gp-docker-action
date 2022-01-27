@@ -13,10 +13,9 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: kldzj/gp-docker-action@1.3.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: my-cool-service # Provide Docker image name
         image-tag: head # Provide Docker image tag
 ```
 
@@ -31,14 +30,13 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish latest Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: kldzj/gp-docker-action@1.3.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: my-cool-service # Provide only Docker image name, tag will be automatically set to latest
         dockerfile: Dockerfile_server
 ```
 
-### Build and publish Docker Image with a tag equal to a git tag
+### Build and publish Docker Image with a tag equal to the commit hash
 
 ```yaml
   build-and-publish-tag:
@@ -49,10 +47,9 @@
     - uses: actions/checkout@v2
 
     - name: Build and Publish Tag Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: kldzj/gp-docker-action@1.3.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: my-cool-service # Provide only Docker image name
         extract-git-tag: true # Provide flag to extract Docker image tag from git reference
 ```
 
@@ -67,31 +64,11 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: kldzj/gp-docker-action@1.3.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: my-cool-service # Provide Docker image name
         build-context: ./dev # Provide path to the folder with the Dockerfile
 ```
-
-### Pulling the image before building it
-
-```yaml
-  pull-and-build-dev:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' # Running this job only for develop branch
-
-    steps:
-    - uses: actions/checkout@v2 # Checking out the repo
-
-    - name: Build and Publish head Docker image
-      uses: VaultVulp/gp-docker-action@1.2.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: my-cool-service # Provide Docker image name
-        pull-image: true # Raise the flag to try to pull image
-```
-
 
 ### Passing additional arguments to the docker build command
 
@@ -104,10 +81,9 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build with --build-arg(s)
-      uses: VaultVulp/gp-docker-action@1.2.0
+      uses: kldzj/gp-docker-action@1.3.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: my-cool-service # Provide Docker image name
         custom-args: --build-arg some=value --build-arg some_other=value # Pass some additional arguments to the docker build command
 ```
 
