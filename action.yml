@@ -8,6 +8,10 @@ inputs:
     description: 'Docker Image tag'
     default: "latest"
     required: false
+  extract-commit-sha:
+    description: 'Extract shorted sha from commit'
+    default: "false"
+    required: false
   extract-git-tag:
     description: 'Extract git-tag from repository'
     default: "false"
@@ -30,6 +34,7 @@ runs:
   args:
     - ${{ inputs.github-token }}
     - ${{ inputs.image-tag }}
+    - ${{ inputs.extract-commit-sha }}
     - ${{ inputs.extract-git-tag }}
     - ${{ inputs.dockerfile }}
     - ${{ inputs.build-context}}
