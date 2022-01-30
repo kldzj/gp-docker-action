@@ -2,7 +2,7 @@
 
 DOCKER_TOKEN=$1
 DOCKER_IMAGE_TAG=$2
-EXTRACT_SHA_FROM_COMMIT=$3
+EXTRACT_TAG_FROM_COMMIT_SHA=$3
 EXTRACT_TAG_FROM_GIT_REF=$4
 DOCKERFILE=$5
 BUILD_CONTEXT=$6
@@ -13,7 +13,7 @@ if [ -n "$DOCKER_IMAGE_TAG" ]; then
   TAGS+=("$DOCKER_IMAGE_TAG")
 fi
 
-if [ "$EXTRACT_SHA_FROM_COMMIT" == "true" ]; then
+if [ "$EXTRACT_TAG_FROM_COMMIT_SHA" == "true" ]; then
   TAGS+=("$(git rev-parse --short HEAD)")
 fi
 
