@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 DOCKER_TOKEN=$1
 DOCKER_IMAGE_TAG=$2
