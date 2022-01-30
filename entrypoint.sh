@@ -10,7 +10,7 @@ CUSTOM_DOCKER_BUILD_ARGS=$7
 
 TAGS=()
 if [ -n "$DOCKER_IMAGE_TAG" ]; then
-  TAGS+=(DOCKER_IMAGE_TAG)
+  TAGS+=("$DOCKER_IMAGE_TAG")
 fi
 
 if [ "$EXTRACT_SHA_FROM_COMMIT" == "true" ]; then
