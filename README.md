@@ -13,7 +13,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: kldzj/gp-docker-action@1.3.1
+      uses: kldzj/gp-docker-action@1.3.3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-tag: head # Provide Docker image tag
@@ -30,7 +30,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish latest Docker image
-      uses: kldzj/gp-docker-action@1.3.1
+      uses: kldzj/gp-docker-action@1.3.3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         dockerfile: Dockerfile_server
@@ -41,13 +41,27 @@
 ```yaml
   build-and-publish-tag:
     runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build and Publish Tag Docker image
+      uses: kldzj/gp-docker-action@1.3.3
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        extract-commit-sha: true # Provide flag to extract Docker image tag from commit hash
+```
+
+```yaml
+  build-and-publish-tag:
+    runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/') # Running this job only for tags
 
     steps:
     - uses: actions/checkout@v2
 
     - name: Build and Publish Tag Docker image
-      uses: kldzj/gp-docker-action@1.3.1
+      uses: kldzj/gp-docker-action@1.3.3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         extract-git-tag: true # Provide flag to extract Docker image tag from git reference
@@ -64,7 +78,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build and Publish head Docker image
-      uses: kldzj/gp-docker-action@1.3.1
+      uses: kldzj/gp-docker-action@1.3.3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         build-context: ./dev # Provide path to the folder with the Dockerfile
@@ -81,7 +95,7 @@
     - uses: actions/checkout@v2 # Checking out the repo
 
     - name: Build with --build-arg(s)
-      uses: kldzj/gp-docker-action@1.3.1
+      uses: kldzj/gp-docker-action@1.3.3
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         custom-args: --build-arg some=value --build-arg some_other=value # Pass some additional arguments to the docker build command
