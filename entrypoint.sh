@@ -27,7 +27,7 @@ if [ "$EXTRACT_TAG_FROM_COMMIT_SHA" == "true" ]; then
 fi
 
 if [ "$EXTRACT_TAG_FROM_GIT_REF" == "true" ]; then
-  EXTRACTED_TAG="$(echo "${GITHUB_REF}" | sed -e "s/refs\/tags\///g")"
+  EXTRACTED_TAG=$(git describe --abbrev=0 --tags)
   echo "Extracted tag from git ref: $EXTRACTED_TAG"
   TAGS+=("$EXTRACTED_TAG")
 fi
