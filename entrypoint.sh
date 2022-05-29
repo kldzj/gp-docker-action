@@ -8,6 +8,8 @@ DOCKERFILE=$5
 BUILD_CONTEXT=$6
 CUSTOM_DOCKER_BUILD_ARGS=$7
 
+echo "Working directory: $(pwd)"
+
 TAGS=()
 if [ -n "$DOCKER_IMAGE_TAG" ]; then
   echo "Fixed tag: $DOCKER_IMAGE_TAG"
@@ -28,7 +30,7 @@ fi
 
 TAG_FLAGS=()
 DOCKER_IMAGE_NAME="ghcr.io/${GITHUB_REPOSITORY}"
-for tag in "${TAGS[@]}"; do TAG_FLAGS+=(-t "$DOCKER_IMAGE_NAME:$tag"); done
+for TAG in "${TAGS[@]}"; do TAG_FLAGS+=(-t "$DOCKER_IMAGE_NAME:$TAG"); done
 
 docker login -u publisher -p "${DOCKER_TOKEN}" ghcr.io
 docker build "${TAG_FLAGS[@]}" -f "$DOCKERFILE" $CUSTOM_DOCKER_BUILD_ARGS "$BUILD_CONTEXT"
