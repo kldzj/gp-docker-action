@@ -41,8 +41,9 @@ runs:
     - ${{ inputs.extract-commit-sha }}
     - ${{ inputs.extract-git-tag }}
     - ${{ inputs.dockerfile }}
-    - ${{ inputs.build-context}}
-    - ${{ inputs.custom-args}}
+    - ${{ inputs.build-context }}
+    - ${{ inputs.custom-args }}
+    - ${{ inputs.add-git-safe-directory }}
 branding:
   icon: 'box'
   color: 'blue'
