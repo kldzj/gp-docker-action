@@ -28,7 +28,7 @@ fi
 
 TAG_FLAGS=()
 DOCKER_IMAGE_NAME="ghcr.io/${GITHUB_REPOSITORY}"
-for tag in "${TAGS[@]}"; do TAG_FLAGS+=("-t $DOCKER_IMAGE_NAME:$tag"); done
+for tag in "${TAGS[@]}"; do TAG_FLAGS+=(-t "$DOCKER_IMAGE_NAME:$tag"); done
 
 docker login -u publisher -p "${DOCKER_TOKEN}" ghcr.io
 docker build "${TAG_FLAGS[@]}" -f "$DOCKERFILE" $CUSTOM_DOCKER_BUILD_ARGS "$BUILD_CONTEXT"
