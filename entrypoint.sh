@@ -7,8 +7,12 @@ EXTRACT_TAG_FROM_GIT_REF=$4
 DOCKERFILE=$5
 BUILD_CONTEXT=$6
 CUSTOM_DOCKER_BUILD_ARGS=$7
+ADD_GIT_SAFE_DIRECTORY=$8
 
 echo "Working directory: $(pwd)"
+if [ "$ADD_GIT_SAFE_DIRECTORY" == "true" ]; then
+  git config --global --add safe.directory $(pwd)
+fi
 
 TAGS=()
 if [ -n "$DOCKER_IMAGE_TAG" ]; then

@@ -6,27 +6,31 @@ inputs:
     required: true
   image-tag:
     description: 'Docker Image tag'
-    default: "latest"
+    default: 'latest'
     required: false
   extract-commit-sha:
     description: 'Extract shorted sha from commit'
-    default: "false"
+    default: 'false'
     required: false
   extract-git-tag:
     description: 'Extract git-tag from repository'
-    default: "false"
+    default: 'false'
     required: false
   dockerfile:
     description: 'Dockerfile name'
-    default: "Dockerfile"
+    default: 'Dockerfile'
     required: false
   build-context:
     description: 'Path to build context'
-    default: "."
+    default: '.'
     required: false
   custom-args:
     description: 'Any additional docker build arguments as a string'
-    default: ""
+    default: ''
+    required: false
+  add-git-safe-directory:
+    description: 'https://github.blog/2022-04-12-git-security-vulnerability-announced/'
+    default: 'true'
     required: false
 runs:
   using: 'docker'
