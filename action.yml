@@ -16,6 +16,10 @@ inputs:
     description: 'Extract git-tag from repository'
     default: 'false'
     required: false
+  extracted-git-tag-split:
+    description: 'Split the extracted git-tag'
+    default: ''
+    required: false
   dockerfile:
     description: 'Dockerfile name'
     default: 'Dockerfile'
@@ -36,6 +40,7 @@ runs:
         DOCKER_IMAGE_TAG: ${{ inputs.image-tag }}
         EXTRACT_TAG_FROM_COMMIT_SHA: ${{ inputs.extract-commit-sha }}
         EXTRACT_TAG_FROM_GIT_REF: ${{ inputs.extract-git-tag }}
+        EXTRACT_TAG_FROM_REF_SPLIT: ${{ inputs.extracted-git-tag-split }}
         DOCKERFILE: ${{ inputs.dockerfile }}
         BUILD_CONTEXT: ${{ inputs.build-context }}
         CUSTOM_DOCKER_BUILD_ARGS: ${{ inputs.custom-args }}
@@ -57,6 +62,10 @@ runs:
 
         if [ "$EXTRACT_TAG_FROM_GIT_REF" == "true" ]; then
           EXTRACTED_TAG=$(git describe --abbrev=0 --tags)
+          if [ -n "$EXTRACT_TAG_FROM_REF_SPLIT" ]; then
+            EXTRACTED_TAG=${EXTRACTED_TAG##*$EXTRACT_TAG_FROM_REF_SPLIT}
+          fi
+
           echo "Extracted tag from git ref: $EXTRACTED_TAG"
           TAGS+=("$EXTRACTED_TAG")
         fi
